@@ -1,0 +1,44 @@
+﻿@using QASite.Data;
+@model IndexViewModel;
+<div class="container">
+    <main role="main" class="pb-3" style="margin-top: 80px;">
+        <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+        @foreach (Question q in Model.Questions)
+        {
+
+            <div class="card card-body bg-light">
+                <h4>
+                    <a href="/question/viewquestion?id=@q.Id">
+                        @q.Title
+                    </a>
+                </h4>
+                <div>
+                    <span id="tags">Tags:</span>
+                    @foreach (QuestionTags qt in q.QuestionTags)
+                    {
+                        <span class="badge badge-primary">@qt.Tag.Name</span>
+                    }
+                </div>
+                <div style="margin-top: 10px;">
+                   @if (q.Text != null && q.Text.Length > 200)
+                   {
+                       @q.Text.Substring(0,200)
+                       <text>...</text>
+                   }
+                   else
+                   {
+                       @q.Title;
+                   }
+                </div>
+                <span>Likes:@q.Likes.Count</span>
+                <br/>
+                <span>@q.Answers.Count answer(s)</span>
+            </div>
+        }
+                </div>
+                    </div>
+        
+    </main>
+</div>
